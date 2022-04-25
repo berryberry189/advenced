@@ -24,4 +24,5 @@ public class TraceStatus {
     public String getMessage() {
         return message;
     }
+
 }
