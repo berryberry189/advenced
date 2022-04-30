@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 @Slf4j
 @Component
-public class HelloTraceV1 {
+public class HelloTraceV2 {
 
     private static final String START_PREFIX = "-->";
     private static final String COMPLETE_PREFIX = "<--";
@@ -20,6 +20,15 @@ public class HelloTraceV1 {
         // 로그 출력
         log.info("[{}] {}{}", id.getId(), assSpace(START_PREFIX, id.getLevel()), message);
         return new TraceStatus(id, startTimeMs, message);
+    }
+
+    // v2 에서 추가, 처음이외의 경우 호출
+    public TraceStatus beginSync(TraceId beforeTraceId, String message) {
+        TraceId nextId = beforeTraceId.createNextId(); // id는 유지하되, 레벨은 증가한다
+        long startTimeMs = System.currentTimeMillis();
+        // 로그 출력
+        log.info("[{}] {}{}", nextId.getId(), assSpace(START_PREFIX, nextId.getLevel()), message);
+        return new TraceStatus(nextId, startTimeMs, message);
     }
 
     public void end(TraceStatus status) {
