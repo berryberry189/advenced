@@ -18,7 +18,7 @@ public class HelloTraceV2 {
         TraceId id = new TraceId();
         long startTimeMs = System.currentTimeMillis();
         // 로그 출력
-        log.info("[{}] {}{}", id.getId(), assSpace(START_PREFIX, id.getLevel()), message);
+        log.info("[{}] {}{}", id.getId(), addSpace(START_PREFIX, id.getLevel()), message);
         return new TraceStatus(id, startTimeMs, message);
     }
 
@@ -27,7 +27,7 @@ public class HelloTraceV2 {
         TraceId nextId = beforeTraceId.createNextId(); // id는 유지하되, 레벨은 증가한다
         long startTimeMs = System.currentTimeMillis();
         // 로그 출력
-        log.info("[{}] {}{}", nextId.getId(), assSpace(START_PREFIX, nextId.getLevel()), message);
+        log.info("[{}] {}{}", nextId.getId(), addSpace(START_PREFIX, nextId.getLevel()), message);
         return new TraceStatus(nextId, startTimeMs, message);
     }
 
@@ -45,16 +45,16 @@ public class HelloTraceV2 {
         long resultTimeMs = stopTimeMs - status.getStartTimeMs();
         TraceId traceId = status.getTraceId();
         if (e == null) {
-            log.info("[{}] {}{} time={}ms", traceId.getId(), assSpace(COMPLETE_PREFIX, traceId.getLevel()),
+            log.info("[{}] {}{} time={}ms", traceId.getId(), addSpace(COMPLETE_PREFIX, traceId.getLevel()),
                     status.getMessage(), resultTimeMs);
         } else {
-            log.info("[{}] {}{} time={}ms ex={}", traceId.getId(), assSpace(EX_PREFIX, traceId.getLevel()),
+            log.info("[{}] {}{} time={}ms ex={}", traceId.getId(), addSpace(EX_PREFIX, traceId.getLevel()),
                     status.getMessage(), resultTimeMs, e.toString());
         }
 
     }
 
-    private static String assSpace(String prefix, int level) {
+    private static String addSpace(String prefix, int level) {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < level; i++) {
             sb.append((i == level - 1) ? "|" + prefix : "|  ");

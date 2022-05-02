@@ -20,7 +20,7 @@ public class FieldLogTrace implements LogTrace {
         TraceId traceId = traceIdHolder;
         long startTimeMs = System.currentTimeMillis();
         // 로그 출력
-        log.info("[{}] {}{}", traceId.getId(), assSpace(START_PREFIX, traceId.getLevel()), message);
+        log.info("[{}] {}{}", traceId.getId(), addSpace(START_PREFIX, traceId.getLevel()), message);
         return new TraceStatus(traceId, startTimeMs, message);
     }
 
@@ -48,10 +48,10 @@ public class FieldLogTrace implements LogTrace {
         long resultTimeMs = stopTimeMs - status.getStartTimeMs();
         TraceId traceId = status.getTraceId();
         if (e == null) {
-            log.info("[{}] {}{} time={}ms", traceId.getId(), assSpace(COMPLETE_PREFIX, traceId.getLevel()),
+            log.info("[{}] {}{} time={}ms", traceId.getId(), addSpace(COMPLETE_PREFIX, traceId.getLevel()),
                     status.getMessage(), resultTimeMs);
         } else {
-            log.info("[{}] {}{} time={}ms ex={}", traceId.getId(), assSpace(EX_PREFIX, traceId.getLevel()),
+            log.info("[{}] {}{} time={}ms ex={}", traceId.getId(), addSpace(EX_PREFIX, traceId.getLevel()),
                     status.getMessage(), resultTimeMs, e.toString());
         }
 
@@ -66,7 +66,7 @@ public class FieldLogTrace implements LogTrace {
         }
     }
 
-    private static String assSpace(String prefix, int level) {
+    private static String addSpace(String prefix, int level) {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < level; i++) {
             sb.append((i == level - 1) ? "|" + prefix : "|  ");
