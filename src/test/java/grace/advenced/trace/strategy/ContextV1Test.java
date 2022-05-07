@@ -1,9 +1,9 @@
 package grace.advenced.trace.strategy;
 
-import grace.advenced.trace.strategy.code.ContextV1;
-import grace.advenced.trace.strategy.code.Strategy;
-import grace.advenced.trace.strategy.code.StrategyLogic1;
-import grace.advenced.trace.strategy.code.StrategyLogic2;
+import grace.advenced.trace.strategy.code.strategy.ContextV1;
+import grace.advenced.trace.strategy.code.strategy.Strategy;
+import grace.advenced.trace.strategy.code.strategy.StrategyLogic1;
+import grace.advenced.trace.strategy.code.strategy.StrategyLogic2;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 
