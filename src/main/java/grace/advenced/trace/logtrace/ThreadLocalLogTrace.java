@@ -12,7 +12,6 @@ public class ThreadLocalLogTrace implements LogTrace {
     private static final String EX_PREFIX = "<-X ";
 
     // traceId 보관소 traceId 동기화, 동시성 이슈 발생
-    // private TraceId traceIdHolder;
     private ThreadLocal<TraceId> traceIdHolder = new ThreadLocal<>();
 
     @Override
